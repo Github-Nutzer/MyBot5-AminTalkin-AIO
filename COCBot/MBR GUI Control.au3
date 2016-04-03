@@ -66,7 +66,8 @@ AtkLogHead()
 #include "GUI\MBR GUI Control Tab Stats.au3"
 #include "GUI\MBR GUI Control Collectors.au3"
 #include "GUI\MBR GUI Control Milking.au3"
-
+; Added by AminTakin
+#include "GUI\MBR GUI Control About.au3"
 ; Accelerator Key, more responsive than buttons in run-mode
 Local $aAccelKeys[1][2] = [["{ESC}", $btnStop]]
 GUISetAccelerators($aAccelKeys)
@@ -94,10 +95,10 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 				Case $GUI_EVENT_CLOSE
 					; Clean up resources
 					BotClose()
-				Case $labelMyBotURL
-					ShellExecute("https://MyBot.run/forums") ;open web site when clicking label
-				Case $labelForumURL
-					ShellExecute("https://mybot.run/forums/index.php?/forum/4-official-releases/") ;open web site when clicking label
+				;Case $labelMyBotURL
+				;	ShellExecute("https://MyBot.run/forums") ;open web site when clicking label
+				;Case $labelForumURL
+				;	ShellExecute("https://mybot.run/forums/index.php?/forum/4-official-releases/") ;open web site when clicking label
 				Case $btnStop
 					btnStop()
 				Case $btnPause
@@ -116,6 +117,8 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 					btnAttackNowTS()
 				Case $DonateConfig
 					ShellExecute("https://mybot.run/forums/index.php?/donate/make-donation/")
+				Case $AboutConfig
+					OpenGUIAbout()
 				Case $btnDeletePBMessages
 					If $RunState Then
 						btnDeletePBMessages() ; call with flag when bot is running to execute on _sleep() idle

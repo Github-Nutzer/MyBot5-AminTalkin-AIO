@@ -115,6 +115,7 @@ Func launchStandard($listInfoDeploy, $CC, $King, $Queen, $Warden, $overrideSmart
 	Local $pixelRandomDrop[2]
 	Local $pixelRandomDropCC[2]
 
+	Local $troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge
 	Local $aDeployButtonPositions = getUnitLocationArray()
 	Local $barPosition = -1
 

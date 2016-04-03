@@ -181,7 +181,7 @@ Func dropSpell($x, $y, $spell = -1, $number = 1) ; Drop Spell
 		If _Sleep(100) Then Return
 
 		SelectDropTroop($barCCSpell) ; Select Clan Castle Spell
-		SetLog("Dropping " & getTranslatedTroopName($spell) & " in the Clan Castle" & " at " & $x & "," & $y, $COLOR_BLUE)
+		SetLog("Dropping " & getTranslatedTroopName($spell) & " in the Clan Castle" & " on button " & ($barCCSpell + 1) & " at " & $x & "," & $y, $COLOR_BLUE)
 		AttackClick($x, $y, $ccSpellCount, 100, 0)
 		$number -= $ccSpellCount
 	
@@ -190,9 +190,8 @@ Func dropSpell($x, $y, $spell = -1, $number = 1) ; Drop Spell
 			If $debugSetlog = 1 Then SetLog("Dropping " & getTranslatedTroopName($spell) & " in slot " & $barPosition, $COLOR_BLUE)
 
 			SelectDropTroop($barPosition) ; Select Spell
-			SetLog("Dropping " & $number & " " & getTranslatedTroopName($spell) & " at " & $x & "," & $y, $COLOR_BLUE)
-			
-			AttackClick($x, $y, $number, SetSleep(0), 0)
+			SetLog("Dropping " & $number & " " & getTranslatedTroopName($spell) & " on button " & ($barPosition + 1) & " at " & $x & "," & $y, $COLOR_BLUE)			
+			AttackClick($x, $y, $number, 100, 0)
 		EndIf
 		
 		$result = True
@@ -200,8 +199,8 @@ Func dropSpell($x, $y, $spell = -1, $number = 1) ; Drop Spell
 		If _Sleep(100) Then Return
 
 		SelectDropTroop($barPosition) ; Select Spell
-		SetLog("Dropping " & $number & " " & getTranslatedTroopName($spell) & " at " & $x & "," & $y, $COLOR_BLUE)
-		AttackClick($x, $y, $number, SetSleep(0), 0)
+		SetLog("Dropping " & $number & " " & getTranslatedTroopName($spell) & " on button " & ($barPosition + 1) & " at " & $x & "," & $y, $COLOR_BLUE)
+		AttackClick($x, $y, $number, 100, 0)
 
 		$result = True
 	EndIf

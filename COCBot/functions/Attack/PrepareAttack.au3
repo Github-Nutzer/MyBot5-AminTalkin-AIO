@@ -46,27 +46,6 @@ Func IsTroopToBeUsed($pMatchMode, $pTroopType)
 	Return False
 EndFunc   ;==>IsTroopToBeUsed
 
-Func TestScreenCap($x, $y, $x2, $y2)
-    Local $hBitmap1, $hBitmap2, $hImage1, $hImage2, $hGraphics
-
-    ; Initialize GDI+ library
-    _GDIPlus_Startup()
-
-    ; Capture full screen
-    $hBitmap1 = _ScreenCapture_Capture("", $x, $y, $x2, $y2)
-    $hImage1 = _GDIPlus_BitmapCreateFromHBITMAP($hBitmap1)
-
-    ; Save resultant image
-    _GDIPlus_ImageSaveToFile($hImage1, @ScriptDir & "\GDIPlus_Image.jpg")
-
-    ; Clean up resources
-    _GDIPlus_ImageDispose($hImage1)
-    _WinAPI_DeleteObject($hBitmap1)
-
-    ; Shut down GDI+ library
-    _GDIPlus_Shutdown()
-EndFunc   ;==>Example
-
 Func PrepareAttack($pMatchMode, $Remaining = False) ; Assigns troops
 	Local Static $barCounter = 0
 
@@ -95,7 +74,6 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ; Assigns troops
 
 	; SuspendAndroid()
 	$result = DllCall($hFuncLib, "str", "searchIdentifyTroop", "ptr", $hHBitmap2)
-
 	If $debugSetlog = 1 Then SetLog("First Search of Troopsbar, getting units and spells", $COLOR_PURPLE)
 	If $debugSetlog = 1 Then Setlog("DLL Troopsbar list: " & $result[0], $COLOR_PURPLE)
 
@@ -114,9 +92,8 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ; Assigns troops
 	; Check to see if a second copy of any of the dark elixir spells exists, as this will be a Clan Castle Spell
 	_CaptureRegion2(GetXPosofArmySlot($barCounter, 68), 571 + $bottomOffsetY, 859, 671 + $bottomOffsetY)
 	If _Sleep($iDelayPrepareAttack1) Then Return
-	TestScreenCap(GetXPosofArmySlot($barCounter, 68), 571 + $bottomOffsetY, 859, 671 + $bottomOffsetY)
-	$result = DllCall($hFuncLib, "str", "searchIdentifyTroop", "ptr", $hHBitmap2)
-	
+
+	$result = DllCall($hFuncLib, "str", "searchIdentifyTroop", "ptr", $hHBitmap2)	
 	If $debugSetlog = 1 Then Setlog("Second Search of Troopsbar, checking for CC Spells", $COLOR_PURPLE)
 	If $debugSetlog = 1 Then Setlog("DLL Troopsbar list: " & $result[0], $COLOR_PURPLE)
 	

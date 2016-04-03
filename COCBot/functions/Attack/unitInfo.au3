@@ -119,13 +119,20 @@ Func unitLocation($kind) ; Gets the location of the unit type on the bar.
 EndFunc   ;==>unitLocation
 
 Func getUnitLocationArray() ; Gets the location on the bar for every type of unit.
-	Local $result[$eCCSpell + 1]
+	Local $result[$eCCSpell + 1] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
-	; Loop through all the units to get their bar position.
-	For $i = $eBarb To $eCCSpell
-		$result[$i] = unitLocation($i)
-
-		If $debugSetlog = 1 And $result[$i] <> -1 Then SetLog(getTranslatedTroopName($i) & " in button location number " & $result[$i])
+	; Loop through all the bar and assign it position to the respective unit.
+	For $i = 0 To UBound($atkTroops) - 1
+		If Number($atkTroops[$i][0]) <> -1 Then
+			$result[Number($atkTroops[$i][0])] = $i
+			If $debugSetlog = 1 Then 
+				If Number($atkTroops[$i][0]) = $eCCSpell Then
+					SetLog("Clan Castle Spell (" & getTranslatedTroopName($CCSpellType) & ") on button location number " & $i)
+				Else
+					SetLog(getTranslatedTroopName(Number($atkTroops[$i][0])) & " on button location number " & $i)
+				EndIf
+			EndIf
+		EndIf
 	Next
 
 	; Return the positions as an array.
@@ -161,13 +168,17 @@ Func unitCount($kind) ; Gets a count of the number of units of the type specifie
 EndFunc   ;==>unitCount
 
 Func unitCountArray() ; Gets a count of the number of units for every type of unit.
-	Local $result[$eCCSpell + 1]
+	Local $result[$eCCSpell + 1] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
-	; Loop through all the units to get their count.
-	For $i = $eBarb To $eCCSpell
-		$result[$i] = unitCount($i)
-
-		If $debugSetlog = 1 And $result[$i] <> 0 Then SetLog("Total of " & $result[$i] & " " & getTranslatedTroopName($i) & " remaining.")
+	; Loop through all the bar and assign its unit count to the respective unit.
+	For $i = 0 To UBound($atkTroops) - 1
+		If Number($atkTroops[$i][1]) > 0 Then
+			$result[Number($atkTroops[$i][0])] = $atkTroops[$i][1]
+			If $debugSetlog = 1 And Number($atkTroops[$i][0]) < $eCCSpell _ 
+				And $atkTroops[$i][1] <> "" And Number($atkTroops[$i][1]) > 0 Then
+					SetLog("Total of " & $result[Number($atkTroops[$i][1])] & " " & getTranslatedTroopName(Number($atkTroops[$i][0])) & " remaining.")			
+			EndIf
+		EndIf
 	Next
 
 	; Return the count as an array.
