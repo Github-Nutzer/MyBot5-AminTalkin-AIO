@@ -465,7 +465,7 @@ Func Attack() ;Selects which algorithm
 	SetLog(" ====== Start Attack ====== ", $COLOR_GREEN)
 	If  ($iMatchMode = $DB and $ichkUseAttackDBCSV = 1) or ($iMatchMode = $LB and $ichkUseAttackABCSV = 1) Then
 		Algorithm_AttackCSV()
-	Elseif $iMatchMode= $LB and  $iChkDeploySettings[$LB] = 6 Then
+	Elseif $iMatchMode= $LB and  $iChkDeploySettings[$LB] = $eMilking Then
 	    Alogrithm_MilkingAttack()
 		; check if can snipe external TH
 		If $OptTrophyMode = 1 Then ;Enables Combo Mode Settings
