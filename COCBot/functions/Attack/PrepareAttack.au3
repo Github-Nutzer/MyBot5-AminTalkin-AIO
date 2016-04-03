@@ -47,30 +47,24 @@ Func IsTroopToBeUsed($pMatchMode, $pTroopType)
 EndFunc   ;==>IsTroopToBeUsed
 
 Func PrepareAttack($pMatchMode, $Remaining = False) ; Assigns troops
-	Local Static $barCounter = 0
-
 	Local $result, $troopData, $kind
 	Local $aTemp[12][3], $aTroopDataList
-	
+	Local $barCounter = 0
+
 	If $debugSetlog = 1 Then SetLog("PrepareAttack", $COLOR_PURPLE)
 
+	; Clear the variables to make sure there is no old data in it
+	Dim $atkTroops[12][2]
+	$CCSpellType = -1
+	
 	If $Remaining Then
 		SetLog("Checking remaining unused troops for: " & $sModeText[$pMatchMode], $COLOR_BLUE)
-
-		_CaptureRegion2(0, 571 + $bottomOffsetY, GetXPosofArmySlot($barCounter, 68), 671 + $bottomOffsetY)
-		If _Sleep($iDelayPrepareAttack1) Then Return
 	Else
-		; Clear and reset variables from previous search
-		Dim $atkTroops[12][2] ; This erases the data in the array
-
-		$barCounter = 0 ; Reset the bar counter for the new search
-		$CCSpellType = -1 ; Removes the currently save CC Spell Type
-
-		SetLog("Initiating attack for: " & $sModeText[$pMatchMode], $COLOR_RED)		
+		SetLog("Initiating attack for: " & $sModeText[$pMatchMode], $COLOR_RED)
+	EndIf
 
 		_CaptureRegion2(0, 571 + $bottomOffsetY, 859, 671 + $bottomOffsetY)
 		If _Sleep($iDelayPrepareAttack1) Then Return		
-	EndIf
 
 	; SuspendAndroid()
 	$result = DllCall($hFuncLib, "str", "searchIdentifyTroop", "ptr", $hHBitmap2)
@@ -82,10 +76,11 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ; Assigns troops
 	If $result[0] <> "" Then
 		For $i = 0 To UBound($aTroopDataList) - 1
 			$troopData = StringSplit($aTroopDataList[$i], "#", $STR_NOCOUNT)
-			$aTemp[$i][0] = $troopData[0]
-			$aTemp[$i][1] = $troopData[2]
 		
-			If Not $Remaining Then $barCounter += 1
+			$aTemp[$troopData[1]][0] = $troopData[0]
+			$aTemp[$troopData[1]][1] = $troopData[2]
+				
+			$barCounter = $troopData[1] + 1
 		Next
 	EndIf
 
@@ -102,13 +97,14 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ; Assigns troops
 	If $result[0] <> "" Then
 		For $i = 0 To UBound($aTroopDataList) - 1
 			$troopData = StringSplit($aTroopDataList[$i], "#", $STR_NOCOUNT)
-			If IsUnitAlreadyOnBar($aTemp, $troopData[0], $barCounter + $i) Then
-				$aTemp[$barCounter + $i][0] = $eCCSpell
+			
+			If IsUnitAlreadyOnBar($aTemp, $troopData[0], $barCounter + $troopData[1]) Then
+				$aTemp[$barCounter + $troopData[1]][0] = $eCCSpell
 				$CCSpellType = $troopData[0]
 			Else
-				$aTemp[$barCounter + $i][0] = $troopData[0]
+				$aTemp[$barCounter + $troopData[1]][0] = $troopData[0]
 			EndIf
-			$aTemp[$barCounter + $i][1] = Number($troopData[2])
+			$aTemp[$barCounter + $troopData[1]][1] = $troopData[2]
 		Next
 	EndIf
 	
@@ -124,6 +120,8 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ; Assigns troops
 				$atkTroops[$i][1] = 0
 			ElseIf ($kind = $eKing) Or ($kind = $eQueen) Or ($kind = $eCastle) Or ($kind = $eWarden) Then
 				$atkTroops[$i][1] = ""
+			ElseIf ($kind = $eCCSpell) Then
+				$atkTroops[$i][1] = 1
 			Else
 				$atkTroops[$i][1] = $aTemp[$i][1]
 			EndIf
