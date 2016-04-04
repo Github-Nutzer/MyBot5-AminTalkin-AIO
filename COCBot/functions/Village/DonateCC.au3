@@ -495,63 +495,6 @@ Func DonateTroopType($Type, $Quant = 0, $Custom = False, $bDonateAll = False)
 
 			$bDonate = True
 
-			;DonateStats
-			Local $iImageCompare = False, $iPosY = 0
-
-			$iPosY = $DonatePixel[1] - 76
-		   _CaptureRegion(31, $iPosY, 170, $iPosY + 25, True)
-		   Local $Date = @YEAR & "-" & @MON & "-" & @MDAY
-		   Local $Time = @HOUR & "." & @MIN & "." & @SEC
-
-		    $DonateFile = $Date & "__" & $Time & ".bmp"
-		    _GDIPlus_ImageSaveToFile($hBitmap, $dirTemp & $DonateFile)
-			_GDIPlus_ImageDispose($hBitmap)
-
-			Local $bFileList = _FileListToArray($dirTemp & "DonateStats\", "*.bmp")
-			;SetLog("DonateStats: " & $aFileList)
-			If Not @error And IsArray($bFileList) Then
-				If $debugSetlog = 1 Then SetLog("DonateStats: Testing ImageCompare")
-				$bm1 = _GDIPlus_ImageLoadFromFile($dirTemp & $DonateFile)
-				For $x = 1 To $bFileList[0]
-					$bm2 = _GDIPlus_ImageLoadFromFile($dirTemp & "DonateStats\" & $bFileList[$x])
-					$iImageCompare = CompareBitmaps($bm1, $bm2)
-					If $iImageCompare Then
-						_GDIPlus_ImageDispose($bm2)
-						ExitLoop
-					EndIf
-					_GDIPlus_ImageDispose($bm2)
-				Next
-				_GDIPlus_ImageDispose($bm1)
-			EndIf
-			If $iImageCompare Then
-				If $debugSetlog = 1 Then SetLog("ImageCompare tested True!")
-
-				$TroopCol = GetTroopColumn(NameOfTroop($Type, $plural))
-				$iSearch = _GUICtrlListView_FindInText($lvDonatedTroops, $bFileList[$x])
-				If $iSearch <> -1 Then
-					$TroopValue = _GUICtrlListView_GetItemText($lvDonatedTroops, $iSearch, $TroopCol) + $iDonTroopsQuantity
-					_GUICtrlListView_SetItem($lvDonatedTroops, $TroopValue, $iSearch, $TroopCol)
-				EndIf
-
-			Else
-				FileCopy($dirTemp & "*.bmp", $dirTemp & "DonateStats\", 1)
-				If $debugSetlog = 1 Then SetLog("DonateStats: " & "Adding new Image: " & $dirTemp & "DonateStats\" & $DonateFile & " Troop: " & NameOfTroop($Type, $plural) & " Quantity: " & $iDonTroopsQuantity)
-
-				_GUIImageList_AddBitmap($hImage, $dirTemp & "DonateStats\" & $DonateFile)
-				$iListCount = _GUIImageList_GetImageCount($hImage)
-				_GUICtrlListView_SetImageList($lvDonatedTroops, $hImage, 1)
-				_GUICtrlListView_AddItem($lvDonatedTroops, $DonateFile, $iListCount-1)
-
-				$TroopCol = GetTroopColumn(NameOfTroop($Type, $plural))
-				$iSearch = _GUICtrlListView_FindInText($lvDonatedTroops, $DonateFile)
-				If $iSearch <> -1 Then
-					_GUICtrlListView_SetItem($lvDonatedTroops, $iDonTroopsQuantity, $iSearch, $TroopCol)
-				EndIf
-			EndIf
-
-			FileDelete($dirTemp & "*.bmp")
-			;End DonateStats
-
 			; Assign the donated quantity troops to train : $Don $TroopName
 			If $Custom Then
 				For $i = 0 To UBound($TroopName) - 1

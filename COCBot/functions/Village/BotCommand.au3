@@ -88,6 +88,21 @@ Func BotCommand()
 					$bTrainEnabled = False
 					$bDonationEnabled = False
 				EndIf
+			Case 22
+				If	$myHourlyStatsGold <> "" And $myHourlyStatsGold < $itxtgainperhours	Then
+					$MeetCondStop = True
+					SetLog("gained Gold/H: "& _NumberFormat($myHourlyStatsGold) & " is less than " & _NumberFormat($itxtgainperhours)  , $COLOR_BLUE)
+				EndIf
+			Case 23
+				If	$myHourlyStatsElixir <> "" And $myHourlyStatsElixir < $itxtgainperhours	Then
+					$MeetCondStop = True
+					SetLog("gained Elixir/H: "& _NumberFormat($myHourlyStatsGold) & " is less than " & _NumberFormat($itxtgainperhours)  , $COLOR_BLUE)
+				EndIf
+			Case 24
+				If  $myHourlyStatsGold <> "" And $myHourlyStatsElixir <> "" And ($myHourlyStatsGold + $myHourlyStatsElixir) < $itxtgainperhours   Then
+					$MeetCondStop = True
+					SetLog("gained Gold and Elixir/H: "& _NumberFormat($myHourlyStatsGold + $myHourlyStatsElixir) & " is less than " & _NumberFormat($itxtgainperhours)  , $COLOR_BLUE)
+				EndIf
 		EndSwitch
 
 		If $MeetCondStop Then
