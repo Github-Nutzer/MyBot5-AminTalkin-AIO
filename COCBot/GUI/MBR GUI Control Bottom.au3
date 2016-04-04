@@ -205,7 +205,7 @@ Func btnStart()
 
 		For $i = $FirstControlToHide To $LastControlToHide ; Save state of all controls on tabs
 			; Added $tabAndroid to the list - Added by LunaEclipse
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i= $tabAttackCSV Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabProfiles Or $i = $tabDeploy Or $i = $tabDonateStats Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i= $tabAttackCSV Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabProfiles Or $i = $tabDeploy Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider
@@ -213,7 +213,7 @@ Func btnStart()
 		Next
 		For $i = $FirstControlToHide To $LastControlToHide ; Disable all controls in 1 go on all tabs
 			; Added $tabAndroid to the list - Added by LunaEclipse
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i=$tabAttackCSV Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabProfiles Or $i = $tabDonateStats Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i=$tabAttackCSV Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider
@@ -287,7 +287,7 @@ Func btnStop()
 
 		For $i = $FirstControlToHide To $LastControlToHide ; Restore previous state of controls
 			; Added $tabAndroid to the list - Added by LunaEclipse
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabEndBattle Or $i = $tabExpert Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabProfiles Or $i = $tabDonateStats Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabEndBattle Or $i = $tabExpert Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider

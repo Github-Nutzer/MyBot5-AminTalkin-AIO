@@ -56,7 +56,7 @@ GUICtrlSetOnEvent(-1, "")
 #include "GUI\MBR GUI Design Tab Notify.au3"
 ;#include "GUI\MBR GUI Design Tab Android.au3"
 #include "GUI\MBR GUI Design Tab Expert.au3"
-#include "GUI\MBR GUI Design Tab DonateStats.au3"
+;#include "GUI\MBR GUI Design Tab DonateStats.au3"
 #include "GUI\MBR GUI Design Tab Stats.au3" ; includes '$LastControlToHide" on GUI
 #include "GUI\MBR GUI Design Collectors.au3"
 #include "GUI\MBR GUI Design About.au3" ; Added By AminTalkin

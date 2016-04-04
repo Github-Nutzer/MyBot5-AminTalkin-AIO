@@ -259,7 +259,7 @@
 #include "functions\Village\ProfileSwitch.au3"
 
 ;DonateStats - by Cutidudz
-#include "functions\DonateStats\DonateStats.au3"
+;#include "functions\DonateStats\DonateStats.au3"
 ; Attack files - Added by LunaEclipse
 #include "functions\Attack\attackFunctions.au3"
 #include "functions\Attack\unitInfo.au3"
