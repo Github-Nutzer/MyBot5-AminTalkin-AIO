@@ -14,9 +14,11 @@
 ; ===============================================================================================================================
 
 Func OpenGUIAbout()
-   GUIAbout()
-   GUISetState(@SW_SHOW, $hAboutGUI)
-   GUISetState(@SW_DISABLE, $frmBot)
+	If $hAboutGUI = 0 Then
+	   GUIAbout()
+	   GUISetState(@SW_SHOW, $hAboutGUI)
+	   GUISetState(@SW_DISABLE, $frmBot)
+	EndIf
 EndFunc
 Func CloseGUIAbout()
 	GUIDelete($hAboutGUI)

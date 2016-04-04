@@ -32,6 +32,7 @@ $DonateConfig = GUICtrlCreateMenuItem("Support the development", $DonateMenu)
 $AboutMenu = GUICtrlCreateMenu("Help")
 $AboutConfig = GUICtrlCreateMenuItem("About Us", $AboutMenu)
 GUICtrlSetOnEvent(-1, "")
+;GUICtrlSetState($AboutConfig, $GUI_DISABLE)
 
 ;~ ------------------------------------------------------
 ;~ Tab Files
@@ -53,8 +54,9 @@ GUICtrlSetOnEvent(-1, "")
 #include "GUI\MBR GUI Design Tab MOD.au3"
 #include "GUI\MBR GUI Design Tab Upgrade.au3"
 #include "GUI\MBR GUI Design Tab Notify.au3"
-#include "GUI\MBR GUI Design Tab Android.au3"
+;#include "GUI\MBR GUI Design Tab Android.au3"
 #include "GUI\MBR GUI Design Tab Expert.au3"
+#include "GUI\MBR GUI Design Tab DonateStats.au3"
 #include "GUI\MBR GUI Design Tab Stats.au3" ; includes '$LastControlToHide" on GUI
 #include "GUI\MBR GUI Design Collectors.au3"
 #include "GUI\MBR GUI Design About.au3" ; Added By AminTalkin

@@ -62,3 +62,33 @@ EndFunc   ;==>txtPercentCollectors
 Func txtDistance()
 	$redlineDistance = GUICtrlRead($txtDistance)
 EndFunc   ;==>txtDistance
+
+	; Android Settings
+Func setupAndroidComboBox()
+	Local $androidString = ""
+	Local $aAndroid = getInstalledEmulators()
+
+	; Convert the array into a string
+	$androidString = _ArrayToString($aAndroid, "|")
+
+	; Set the new data of valid Emulators
+	GUICtrlSetData($cmbAndroid, $androidString, $aAndroid[0])
+EndFunc   ;==>setupAndroidComboBox
+
+Func cmbAndroid()
+	$sAndroid = GUICtrlRead($cmbAndroid)
+	modifyAndroid()
+EndFunc   ;==>cmbAndroid
+
+Func txtAndroidInstance()
+	$sAndroidInstance = GUICtrlRead($txtAndroidInstance)
+	modifyAndroid()
+EndFunc   ;==>$txtAndroidInstance
+
+Func HideTaskbar()
+	If GUICtrlRead($chkHideTaskBar) = $GUI_CHECKED Then
+		$ichkHideTaskBar = 1
+	Else
+		$ichkHideTaskBar = 0
+	EndIf
+EndFunc   ;==>HideTaskbar

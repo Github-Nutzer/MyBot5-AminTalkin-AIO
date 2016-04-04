@@ -164,6 +164,7 @@ Func IsStopped()
 EndFunc
 
 Func btnStart()
+	GUICtrlSetState($AboutConfig, $GUI_DISABLE)
     ResumeAndroid()
 	If $RunState = False Then
 	    ;GUICtrlSetState($chkBackground, $GUI_DISABLE) ; will be disbaled after check if Android supports Background Mode
@@ -204,7 +205,7 @@ Func btnStart()
 
 		For $i = $FirstControlToHide To $LastControlToHide ; Save state of all controls on tabs
 			; Added $tabAndroid to the list - Added by LunaEclipse
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i= $tabAttackCSV Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabAndroid Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i= $tabAttackCSV Or $i = $tabDeploy Or $i = $tabMods Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider
@@ -212,7 +213,7 @@ Func btnStart()
 		Next
 		For $i = $FirstControlToHide To $LastControlToHide ; Disable all controls in 1 go on all tabs
 			; Added $tabAndroid to the list - Added by LunaEclipse
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i=$tabAttackCSV Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabAndroid Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i=$tabAttackCSV Or $i = $tabDeploy Or $i = $tabMods Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider
@@ -257,6 +258,7 @@ Func btnStart()
 EndFunc   ;==>btnStart
 
 Func btnStop()
+	GUICtrlSetState($AboutConfig, $GUI_ENABLE)
     ResumeAndroid()
 	If $RunState Then ; Or BitOr(GUICtrlGetState($btnStop), $GUI_SHOW) Then ; $btnStop check added for strange $RunState inconsistencies
 
@@ -285,7 +287,7 @@ Func btnStop()
 
 		For $i = $FirstControlToHide To $LastControlToHide ; Restore previous state of controls
 			; Added $tabAndroid to the list - Added by LunaEclipse
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabEndBattle Or $i = $tabExpert Or $i = $tabDeploy Or $i = $tabMOD Or $i = $tabAndroid Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabEndBattle Or $i = $tabExpert Or $i = $tabDeploy Or $i = $tabMods Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider
